@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CheckBox Tree - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../demo.css">
+    <script type="text/javascript" src="../../jquery.min.js"></script>
+    <script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+</head>
+<body>
+<div class="easyui-layout" style="width:800px;height:350px;">
+    <div data-options="region:'east',border:false" style="width:400px;">
+        <h2>Basic DataList</h2>
+        <p>The DataList can be created from the &lt;ul&gt; element.</p>
+        <div style="margin:20px 0;"></div>
+        <ul id="dg" class="easyui-datalist" title="Basic DataList" lines="true" style="width:400px;height:250px">
+        </ul>
+    </div>
+    <div data-options="region:'west',border:false" style="width:400px;">
+        <h2>CheckBox Tree</h2>
+        <p>Tree nodes with check boxes.</p>
+        <div style="margin:20px 0;">
+            <a href="#" class="easyui-linkbutton" onclick="getChecked()">GetChecked</a>
+            <a href="#" class="easyui-linkbutton" onclick="deleteDataList()">deleteDataList</a>
+        </div>
+        <div style="margin:10px 0">
+        </div>
+        <div class="easyui-panel" style="padding:5px;width:350px">
+            <ul id="tt" class="easyui-tree" data-options="
+		url:'tree_data1.json',
+		method:'get',
+		animate:false,
+		checkbox:true,
+		cascadeCheck:false,
+		lines:true,
+		onlyLeafCheck:true"></ul>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    $('#tt').tree({
+        onCheck: function (node, checked) {
+//            console.log('checked:' + checked);
+            if (checked) {
+                $('#dg').datagrid('appendRow', {
+                    text: node.text,
+                    value: node.text
+                });
+            } else {
+//                console.log($('#dg').datagrid('getRows'));
+                rows = $('#dg').datagrid('getRows');
+                for (var i = 0; i < rows.length; i++) {
+                    if (node.text == rows[i].text) {
+                        $('#dg').datagrid('deleteRow', i);
+                    }
+                }
+
+            }
+        }
+    });
+    
+    function deleteDataList() {
+        $('#dg').datagrid('deleteRow',$('#dg').datagrid('getRowIndex',$('#dg').datagrid('getSelected')));
+        //TODO 删除datalist里的记录后，也删除tree里的节点
+    }
+</script>
+</body>
+</html>
