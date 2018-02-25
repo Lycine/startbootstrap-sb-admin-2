@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DataGrid Complex Toolbar - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../demo.css">
+    <script type="text/javascript" src="../../jquery.min.js"></script>
+    <script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+</head>
+<body>
+<h2>作业管理</h2>
+<!--<p>发布的作业进行增删改查操作</p>-->
+<hr/>
+<table class="easyui-datagrid" title="" style="width:100%;max-width:1500px;height:600px;"
+       data-options="striped:true,
+			rownumbers:true,
+			singleSelect:true,
+			url:'datagrid_data1.json',
+			method:'get',
+			toolbar:'#tb',
+			footer:'#ft',
+			remoteSort:false,
+			multiSort:true,
+			pageList:[10,20,100]"
+       rownumbers="true" pagination="true">
+    <thead>
+    <tr>
+        <th field="ck" checkbox="true"></th>
+        <th data-options="field:'itemid',width:80,sortable:true">Item ID</th>
+        <th data-options="field:'productid',width:100,sortable:true">Product</th>
+        <th data-options="field:'listprice',width:80,align:'right'">List Price</th>
+        <th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
+        <th data-options="field:'attr1',width:240">Attribute</th>
+        <th data-options="field:'status',width:60,align:'center'">Status</th>
+    </tr>
+    </thead>
+</table>
+<div id="tb" style="padding:2px 5px;">
+    <div style="margin-bottom:5px">
+        <select class="easyui-combobox"  data-options="label:'班级:',labelWidth:'120'" panelHeight="auto" style="width:100%;max-width:300px;">
+            <option value="java">Java</option>
+            <option value="c">C</option>
+            <option value="basic">Basic</option>
+            <option value="perl">Perl</option>
+            <option value="python">Python</option>
+        </select>
+        <input id="productid2" data-options="label:'&nbsp;&nbsp;&nbsp;学生编号:',labelWidth:'120'" class="easyui-textbox" style="width:100%;max-width:300px;">
+        <input id="productid3" data-options="label:'&nbsp;&nbsp;&nbsp;学生姓名:',labelWidth:'120'" class="easyui-textbox" style="width:100%;max-width:300px;">
+    </div>
+    <div style="margin-bottom:5px">
+
+    <input id="productid1" data-options="label:'作业编号:',labelWidth:'120'" class="easyui-textbox" style="width:100%;max-width:300px;">
+
+    <input id="productid4" data-options="label:'&nbsp;&nbsp;&nbsp;作业名:',labelWidth:'120'" class="easyui-textbox" style="width:100%;max-width:300px;">
+
+    <input id="productid" data-options="label:'&nbsp;&nbsp;&nbsp;作业状态:',labelWidth:'120'" class="easyui-textbox" style="width:100%;max-width:300px;">
+    </div>
+    <div style="margin-bottom:5px">
+        <input class="easyui-datebox" data-options="label:'deadline From:',labelWidth:'120'" style="width:100%;max-width:300px;">
+        <input class="easyui-datebox" data-options="label:'&nbsp;&nbsp;&nbsp;To:',labelWidth:'120'" style="width:100%;max-width:300px;">
+        <a href="#" class="easyui-linkbutton" style="margin-left: 12px" iconCls="icon-search">查找</a>
+    </div>
+
+</div>
+<div id="ft" style="padding:2px 5px;">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="$('#w').window('open')"></a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"></a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cut" plain="true"></a>
+</div>
+
+<div id="w" class="easyui-window" title="Modal Window"
+     data-options="resizable:false,collapsible:false,minimizable:false,maximizable:false,modal:true,closed:true,left:20,top:20"
+     style="width:500px;height:200px;padding:10px;">
+    The window content.
+</div>
+</body>
+</html>

@@ -365,6 +365,12 @@
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
+                    <li>
+                        <a href="../vendor/jquery-easyui-1.5.4.2/demo/tree/standard-tree.html" onclick="resizeIframe()" target="iFrame1" ><i class="fa fa-edit fa-fw"></i> deployer</a>
+                    </li>
+                    <li>
+                        <a href="../vendor/jquery-easyui-1.5.4.2/demo/datagrid/standard-datagrid.html" onclick="resizeIframe()" target="iFrame1" ><i class="fa fa-edit fa-fw"></i> users</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
@@ -375,8 +381,8 @@
     <!-- Page Content -->
     <div id="page-wrapper">
         <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">主页</h1>
+            <div class="col-lg-12" id="page1">
+                <h1 class="page-header" >主页</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -384,11 +390,11 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="page2">
                         个人信息
                     </div>
                     <div class="panel-body ">
-                        <iframe name="Info1" id="Info1" src="../vendor/jquery-easyui-1.5.4.2/demo/tree/standard-tree.html" onload="this.height=Info1.document.body.scrollHeight" width="100%" scrolling="yes" frameborder="0" class="hidden-xs hidden-sm"></iframe>
+                        <iframe name="iFrame1" id="iFrame1" src="" onload="" scrolling="yes" width="100%" frameborder="0" class="hidden-xs hidden-sm"></iframe>
                         <p class="visible-xs visible-sm">请使用电脑浏览器查看此内容</p>
                     </div>
                     <!-- /.panel-body -->
@@ -403,6 +409,12 @@
 </div>
 <!-- /#wrapper -->
 
+<script>
+    function resizeIframe() {
+        // $('#iFrame1').height($(document).height());
+        $('#iFrame1').height($('#page-wrapper').height()-(2*$('#page1').height()));
+    }
+</script>
 <!-- jQuery -->
 <script src="../vendor/jquery/jquery.min.js"></script>
 
