@@ -1,2 +1,8 @@
 node_modules
 bower_components
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/inspectionProfiles/
+.idea/modules.xml
+.idea/startbootstrap-sb-admin-2.iml
+.idea/workspace.xml

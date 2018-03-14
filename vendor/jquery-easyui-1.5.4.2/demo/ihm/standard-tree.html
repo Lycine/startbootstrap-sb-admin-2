@@ -71,9 +71,9 @@
 
                 </div>
                 <div style="margin:10px">
-                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addToDataList()"
-                   data-options="iconCls:'icon-add'"
-                   style="width:120px;">添加自定义作业</a>
+                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addToDataList()"
+                       data-options="iconCls:'icon-add'"
+                       style="width:120px;">添加自定义作业</a>
                 </div>
             </form>
             <div style="text-align:left;max-width:300px;padding:5px 0">
@@ -85,34 +85,132 @@
     <div data-options="region:'east',border:false" style="width:35%">
         <h2>已选择作业</h2>
 
-        <ul id="dg" class="easyui-datalist" title="" lines="true"
-            style="width:70%;max-width:500px;height:300px;">
-        </ul>
+        <!--<ul id="dg" class="easyui-datalist" title="" lines="true"-->
+        <!--style="width:70%;max-width:500px;height:300px;">-->
+        <!--</ul>-->
+
+
+        <table id="dg" class="easyui-datagrid" style="max-width:400px;height:300px;"
+               data-options="striped:true,
+           scrollOnSelect:true,
+           singleSelect:false"
+        >
+            <thead>
+            <tr>
+                <th field="ck" checkbox="true"></th>
+                <th data-options="field:'selectedAssignment',width:185">已选中作业</th>
+                <th data-options="field:'deadline',width:186">截止日期</th>
+            </tr>
+            </thead>
+        </table>
+
+        <div style="margin-bottom:20px">
+            <input id="dtb" class="easyui-datetimebox" label="Select DateTime:" labelPosition="top" style="width:100%;">
+        </div>
         <div style="margin:20px 0;">
-            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" style="width:120px;" onclick="deleteDataList()">删除选中作业</a>
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" style="width:120px;"
+               onclick="deleteDataList()">删除选中作业</a>
+        </div>
+        <div style="margin:20px 0;">
+            <a href="#" class="easyui-linkbutton" data-options="" style="width:120px;"
+               onclick="selectedAssignmentDatagridSetDeadline()">为选中作业添加截止日期</a>
+        </div>
+        <div style="margin:20px 0;">
+            <a href="#" class="easyui-linkbutton" data-options="" style="width:120px;"
+               onclick="$('#dlg').dialog('open')">提交</a>
         </div>
 
-        <div style="margin:20px 0;">
-            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-large-picture',size:'large',iconAlign:'top'" onclick="deleteDataList()">下一步</a>
-        </div>
     </div>
 </div>
 
 
+<div id="dlg" class="easyui-dialog" title="确认信息" style="width:400px;height:200px;padding:10px"
+     data-options="
+     closed: true,
+				buttons: [{
+					text:'Ok',
+					iconCls:'icon-ok',
+					handler:function(){
+						alert('ok');
+					}
+				},{
+					text:'Cancel',
+					handler:function(){
+						alert('cancel');;
+					}
+				}]
+			">
+    The dialog content.
+</div>
 <script type="text/javascript">
+    formatterDate = function(date) {
+        var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+        var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"
+            + (date.getMonth() + 1);
+        return date.getFullYear() + '-' + month + '-' + day+' 23:59:59';
+    };
+
+    window.onload = function() {
+        console.log( formatterDate(new Date()))
+        $('#dtb').datetimebox('setValue', formatterDate(new Date()));
+    };
+    function selectedAssignmentDatagridAppendRow(assignmentName, deadline) {
+        //TODO 如果参数不为空
+        $('#dg').datagrid('appendRow', {
+            selectedAssignment: assignmentName,
+            deadline: deadline
+        });
+    }
+
+    function selectedAssignmentDatagridGetChecked() {
+        var arr = $('#dg').datagrid('getChecked')
+        var indexArr = [];
+        for (var index in arr) {
+            console.log(index);
+            console.log($('#dg').datagrid('getRowIndex', arr[index]));
+            indexArr.push($('#dg').datagrid('getRowIndex', arr[index]));
+        }
+
+        return indexArr;
+    }
+
+    function selectedAssignmentDatagridDeleteRow(i) {
+        $('#dg').datagrid('deleteRow', i);
+    }
+
+    function selectedAssignmentDatagridSetDeadline() {
+        var indexArr = selectedAssignmentDatagridGetChecked();
+        for (var index in indexArr) {
+            $('#dg').datagrid('updateRow', {
+                index: indexArr[index],
+                row: {
+                    deadline: $('#dtb').val()
+                }
+            });
+        }
+    }
+
+
     $('#tt').tree({
         onCheck: function (node, checked) {
 //            console.log('checked:' + checked);
             if (checked) {
                 $('#dg').datagrid('appendRow', {
-                    text: node.text,
-                    value: node.id
+                    selectedAssignment: node.text,
+                    deadline: ''
                 });
+//                $('#dg').datagrid('appendRow', {
+//                    text: node.text,
+//                    value: node.id
+//                });
             } else {
 //                console.log($('#dg').datagrid('getRows'));
                 rows = $('#dg').datagrid('getRows');
+                console.log(rows)
                 for (var i = 0; i < rows.length; i++) {
-                    if (node.text == rows[i].text) {
+                    console.log('node.text: ' + node.text);
+                    console.log('rows[i].text: ' + rows[i].selectedAssignment);
+                    if (node.text == rows[i].selectedAssignment) {
                         $('#dg').datagrid('deleteRow', i);
                     }
                 }
@@ -146,13 +244,68 @@
     });
 
     function deleteDataList() {
-        var node = $('#tt').tree('find', $('#dg').datagrid('getSelected').value);
-        if (null != node) {
-            $('#tt').tree('uncheck', node.target);
-        } else {
-            $('#dg').datagrid('deleteRow', $('#dg').datagrid('getRowIndex', $('#dg').datagrid('getSelected')));
+//        var arr = [];
+//        arr = selectedAssignmentDatagridGetChecked();
+//
+//
+//
+//        var arr = $('#dg').datagrid('getChecked')
+//        var indexArr = [];
+//        for (var index in arr) {
+//            console.log(index);
+//            console.log($('#dg').datagrid('getRowIndex', arr[index]));
+//            indexArr.push($('#dg').datagrid('getRowIndex', arr[index]));
+//        }
+//
+
+        var arr = $('#dg').datagrid('getChecked')
+
+
+        for (var index in arr) {
+
+            deleteOneDataList(arr[index].selectedAssignment)
+        }
+        $('#dg').datagrid('clearChecked');
+        $('#dg').datagrid('clearSelections');
+
+
+    }
+
+    function deleteOneDataList(assignmentName) {
+        //1.找到"选中作业列表"选中的作业,2.找到tree的节点
+//        var node = $('#tt').tree('find', assignmentName);
+
+
+        //找到tree所有选中的，依次比较他们的text，和参数对比，如果相同，把这个target删掉
+//        var nodes = $('#tt').tree('getChecked');
+        var indexArr = $('#tt').tree('getChecked')
+        for (var nodeIndex in indexArr) {
+            var node1 = indexArr[nodeIndex];
+            if (node1.text == assignmentName) {
+                $('#tt').tree('uncheck', node1.target);
+//                if (null != node) {
+//
+//                } else {
+//                    //如果存在节点里，直接删了就行，tree里会直接被删
+//
+//                }
+            }
         }
 
+        var customNode = $('#dg').datagrid('getSelected');
+        if (null != customNode) {
+            $('#dg').datagrid('deleteRow', $('#dg').datagrid('getRowIndex', customNode));
+        }
+
+//        console.log('node: ' + node)
+        console.log(node1)
+//        //如果节点不存在，则取消勾选"选中作业列表"里的项，因为是自定义作业
+//        if (null != node) {
+//            $('#tt').tree('uncheck', node.target);
+//        } else {
+//            //如果存在节点里，直接删了就行，tree里会直接被删
+//            $('#dg').datagrid('deleteRow', $('#dg').datagrid('getRowIndex', $('#dg').datagrid('getSelected')));
+//        }
     }
 
     function addToDataList() {
@@ -160,9 +313,10 @@
         console.log(newRowText);
         if (newRowText.length != 0) {
             console.log(1);
+
             $('#dg').datagrid('appendRow', {
-                text: $('#custom-assignment').textbox('getText'),
-                value: '0'
+                selectedAssignment: $('#custom-assignment').textbox('getText'),
+                deadline: ''
             });
         } else {
             $.messager.alert('警告', '不可以添加空自定义作业！', 'warning');
@@ -170,9 +324,48 @@
 
     }
 
-    $("#selected-user").combobox({editable:false});
+    //    function deleteDataList() {
+    //        var node = $('#tt').tree('find', $('#dg').datagrid('getSelected').value);
+    //        if (null != node) {
+    //            $('#tt').tree('uncheck', node.target);
+    //        } else {
+    //            $('#dg').datagrid('deleteRow', $('#dg').datagrid('getRowIndex', $('#dg').datagrid('getSelected')));
+    //        }
+    //
+    //    }
 
-    //TODO 改成按步骤，下一页，上一页。确定完学生和作业后还要选择每个作业的时间。
+    //    function addToDataList() {
+    //        var newRowText = $('#custom-assignment').textbox('getText');
+    //        console.log(newRowText);
+    //        if (newRowText.length != 0) {
+    //            console.log(1);
+    //            $('#dg').datagrid('appendRow', {
+    //                text: $('#custom-assignment').textbox('getText'),
+    //                value: '0'
+    //            });
+    //        } else {
+    //            $.messager.alert('警告', '不可以添加空自定义作业！', 'warning');
+    //        }
+    //
+    //    }
+
+    $("#selected-user").combobox({editable: false});
+
+    function makeAlertMsg() {
+
+        var rows = $('#dg').datagrid('getRows');
+        var result = '<h2>选中的学生: </h2><p>' + $('#selected-user').combo('getText') + '</p>';
+        result += '<h2>作业名&截止时间</h2>'
+        for (var i in rows) {
+            result += '<p>' + rows[i].selectedAssignment + '<br> ' + rows[i].deadline + '</p>'
+
+        }
+        $('#dlg').html(result);
+        return result;
+    }
+
+    //TODO 选中作业表格加一列隐藏，作业id
+    //TODO 加验证，优化代码
 </script>
 </body>
 </html>

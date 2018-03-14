@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Basic DataGrid - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../demo.css">
+    <script type="text/javascript" src="../../jquery.min.js"></script>
+    <script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+</head>
+<body>
+<!--<h1>选中作业后，加截止日期</h1>-->
+<div style="max-width:500px;height:500px;">
+    <div style="margin-bottom:20px">
+        <input id="dtb" class="easyui-datetimebox" label="Select DateTime:" labelPosition="top" style="width:100%;">
+    </div>
+    <table id="dg" class="easyui-datagrid" style="max-width:400px;height:300px;"
+           data-options="striped:true,
+           scrollOnSelect:true,
+           singleSelect:false"
+    >
+        <thead>
+        <tr>
+            <th field="ck" checkbox="true"></th>
+            <th data-options="field:'selectedAssignment',width:185">已选中作业</th>
+            <th data-options="field:'deadline',width:185">截止日期</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+
+<script type="text/javascript">
+    function selectedAssignmentDatagridAppendRow(assignmentName, deadline) {
+        //TODO 如果参数不为空
+        $('#dg').datagrid('appendRow', {
+            selectedAssignment: assignmentName,
+            deadline: deadline
+        });
+    }
+
+    function selectedAssignmentDatagridGetChecked() {
+        var arr = $('#dg').datagrid('getChecked')
+        var indexArr = [];
+        for (var index in arr) {
+            console.log(index);
+            console.log($('#dg').datagrid('getRowIndex', arr[index]));
+            indexArr.push($('#dg').datagrid('getRowIndex', arr[index]));
+        }
+
+        return indexArr;
+    }
+
+    function selectedAssignmentDatagridDeleteRow(i) {
+        $('#dg').datagrid('deleteRow', i);
+    }
+
+    function selectedAssignmentDatagridSetDeadline() {
+        var indexArr = selectedAssignmentDatagridGetChecked();
+        for (var index in indexArr) {
+            $('#dg').datagrid('updateRow', {
+                index: indexArr[index],
+                row: {
+                    deadline: $('#dtb').val()
+                }
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

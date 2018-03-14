@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Accept a Drop - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+</head>
+<body>
+
+
+	<!--<div id="source" style="border:1px solid #ccc;width:700px;height:700px;float:left;margin:5px;">-->
+		<!--drag me!-->
+		<!--<div id="d1" class="drag">Drag 1</div>-->
+		<!--<div id="d2" class="drag">Drag 2</div>-->
+		<!--<div id="d3" class="drag">Drag 3</div>-->
+		<!--<div id="d1" class="drag">Drag 1</div>-->
+		<!--<div id="d2" class="drag">Drag 2</div>-->
+		<!--<div id="d3" class="drag">Drag 3</div>-->
+		<!--<div id="d1" class="drag">Drag 1</div>-->
+		<!--<div id="d2" class="drag">Drag 2</div>-->
+		<!--<div id="d3" class="drag">Drag 3</div>-->
+		<!--<div id="d1" class="drag">Drag 1</div>-->
+		<!--<div id="d2" class="drag">Drag 2</div>-->
+		<!--<div id="d3" class="drag">Drag 3</div>-->
+	<!--</div>-->
+
+	<div style="float:left">
+		<div id="source" class="easyui-panel" title="My Panel"
+			 style="width:710px;height:700px;padding:5px;background:#fafafa;"
+			 data-options="iconCls:'icon-save',closable:true,
+                collapsible:true,minimizable:true,maximizable:true">
+			<div style="float:left" id="d1" class="drag">Drag 1</div>
+			<div style="float:left" id="d2" class="drag">Drag 2</div>
+			<div style="float:left" id="d3" class="drag">Drag 3</div>
+			<div style="float:left" id="d1" class="drag">Drag 1</div>
+			<div style="float:left" id="d2" class="drag">Drag 2</div>
+			<div style="float:left" id="d3" class="drag">Drag 3</div>
+			<div style="float:left" id="d1" class="drag">Drag 1</div>
+			<div style="float:left" id="d2" class="drag">Drag 2</div>
+			<div style="float:left" id="d3" class="drag">Drag 3</div>
+			<div style="float:left" id="d1" class="drag">Drag 1</div>
+			<div style="float:left" id="d2" class="drag">Drag 2</div>
+			<div style="float:left" id="d3" class="drag">Drag 3</div>
+			<div style="float:left" id="d1" class="drag">Drag 1</div>
+			<div style="float:left" id="d2" class="drag">Drag 2</div>
+			<div style="float:left" id="d3" class="drag">Drag 3</div>
+			<div style="float:left" id="d1" class="drag">Drag 1</div>
+			<div style="float:left" id="d2" class="drag">Drag 2</div>
+			<div style="float:left" id="d3" class="drag">Drag 3</div>
+			<div style="float:left" id="d1" class="drag">Drag 1</div>
+			<div style="float:left" id="d2" class="drag">Drag 2</div>
+			<div style="float:left" id="d3" class="drag">Drag 3</div>
+			<div style="float:left" id="d1" class="drag">Drag 1</div>
+			<div style="float:left" id="d2" class="drag">Drag 2</div>
+			<div style="float:left" id="d3" class="drag">Drag 3</div>
+		</div>
+	</div>
+	<div style="float:left">
+		<div id="target" class="easyui-panel" title="My Panel"
+			 style="width:190px;height:700px;padding:5px;background:#fafafa;"
+			 data-options="iconCls:'icon-save',closable:true,
+                collapsible:true,minimizable:true,maximizable:true">
+
+		</div>
+	</div>
+
+	<!--<div id="target" style="border:1px solid #ccc;width:170px;height:700px;float:left;margin:5px;">-->
+		<!--drop here!-->
+	<!--</div>-->
+
+	<style type="text/css">
+		.drag{
+			width:150px;
+			height:150px;
+			padding:4px;
+			margin:5px;
+			border:1px solid #ccc;
+			background:#AACCFF;
+		}
+		.dp{
+			opacity:0.5;
+			filter:alpha(opacity=50);
+		}
+		.over{
+			background:#FBEC88;
+		}
+	</style>
+	<script>
+		$(function(){
+			$('.drag').draggable({
+				proxy:'clone',
+				revert:true,
+				cursor:'auto',
+				onStartDrag:function(){
+					$(this).draggable('options').cursor='not-allowed';
+					$(this).draggable('proxy').addClass('dp');
+				},
+				onStopDrag:function(){
+					$(this).draggable('options').cursor='auto';
+				}
+			});
+			$('#target').droppable({
+				accept:'.drag,#d1,#d3',
+				onDragEnter:function(e,source){
+					$(source).draggable('options').cursor='auto';
+					$(source).draggable('proxy').css('border','1px solid red');
+					$(this).addClass('over');
+				},
+				onDragLeave:function(e,source){
+					$(source).draggable('options').cursor='not-allowed';
+					$(source).draggable('proxy').css('border','1px solid #ccc');
+					$(this).removeClass('over');
+				},
+				onDrop:function(e,source){
+					$(this).append(source)
+					$(this).removeClass('over');
+				}
+			});
+		});
+	</script>
+
+</body>
+</html>
