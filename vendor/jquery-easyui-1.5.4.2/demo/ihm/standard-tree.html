@@ -1,53 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>CheckBox Tree - jQuery EasyUI Demo</title>
-    <link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="../../themes/icon.css">
-    <link rel="stylesheet" type="text/css" href="../demo.css">
-    <script type="text/javascript" src="../../jquery.min.js"></script>
-    <script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+  <meta charset="UTF-8">
+  <title>CheckBox Tree - jQuery EasyUI Demo</title>
+  <link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+  <link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+  <link rel="stylesheet" type="text/css" href="../demo.css">
+  <script type="text/javascript" src="../../jquery.min.js"></script>
+  <script type="text/javascript" src="../../jquery.easyui.min.js"></script>
 </head>
 <body>
-<div class="easyui-layout" style="width:100%;max-width:1500px;height:600px;">
+<div class="easyui-layout" style="width:100%;max-width:1500px;height:500px;">
 
 
-    <div data-options="region:'west',border:false" style="width:30%">
-        <h2>已选择学生</h2>
+  <div data-options="region:'west',border:false" style="width:30%">
+    <h2>已选择学生</h2>
 
-        <ul id="dg2" class="easyui-datalist" title="" lines="true"
-            style="width:70%;max-width:500px;height:300px;">
-        </ul>
-        <div style="margin:20px 0"></div>
-        <h2>选择学生</h2>
-        <div style="margin:20px 0"></div>
+    <ul id="dg2" class="easyui-datalist" title="" lines="true"
+        style="width:70%;max-width:500px;height:250px;">
+    </ul>
+    <div style="margin:10px 0"></div>
+    <h2>选择学生</h2>
+    <div style="margin:10px 0"></div>
 
-        <input
-                id="selected-user"
-                class="easyui-combobox"
-                name="language"
-                style="width:70%;"
-                data-options="
-
-
-					url:'combobox_data1.json',
-					method:'get',
-					valueField:'id',
-					textField:'text',
-					multiple:true,
-					panelHeight:'auto'
-			">
+    <input
+            id="selected-user"
+            class="easyui-combobox"
+            name="language"
+            style="width:70%;"
+            data-options="url:'combobox_data1.json',
+                          method:'get',
+                          valueField:'id',
+                          textField:'text',
+                          multiple:true,
+                          panelHeight:'auto'
+    ">
 
 
+  </div>
+
+  <div data-options="region:'center',border:false" style="width:35%">
+    <h2>从作业条目中选择作业</h2>
+    <div style="margin:10px 0;">
     </div>
-
-    <div data-options="region:'center',border:false" style="width:35%">
-        <h2>从作业条目中选择作业</h2>
-        <div style="margin:20px 0;">
-        </div>
-        <div class="easyui-panel" style="padding:5px;width:70%;max-width:500px;height:300px;">
-            <ul id="tt" class="easyui-tree" data-options="
+    <div class="easyui-panel" style="padding:5px;width:70%;max-width:500px;height:250px;">
+      <ul id="tt" class="easyui-tree" data-options="
 		url:'tree_data1.json',
 		method:'get',
 		animate:false,
@@ -55,77 +52,91 @@
 		cascadeCheck:false,
 		lines:true,
 		onlyLeafCheck:true"></ul>
-        </div>
-        <div style="margin:20px 0;">
-
-        </div>
-        <h2>自定义作业</h2>
-        <div style="margin:20px 0;">
-
-        </div>
-        <div class="easyui-panel" style="width:70%;max-width:500px;">
-            <form id="ff" method="post">
-                <div style="margin:10px">
-                    <input class="easyui-textbox" id="custom-assignment" name="name" style="width:100%;"
-                           data-options="label:''">
-
-                </div>
-                <div style="margin:10px">
-                    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addToDataList()"
-                       data-options="iconCls:'icon-add'"
-                       style="width:120px;">添加自定义作业</a>
-                </div>
-            </form>
-            <div style="text-align:left;max-width:300px;padding:5px 0">
-
-            </div>
-        </div>
     </div>
+    <div style="margin:10px 0;">
 
-    <div data-options="region:'east',border:false" style="width:35%">
-        <h2>已选择作业</h2>
+    </div>
+    <h2>自定义作业</h2>
+    <div style="margin:10px 0;">
 
-        <!--<ul id="dg" class="easyui-datalist" title="" lines="true"-->
-        <!--style="width:70%;max-width:500px;height:300px;">-->
-        <!--</ul>-->
+    </div>
+    <div class="easyui-panel" style="width:70%;max-width:500px;">
+      <form id="ff" method="post">
+        <div style="margin:7px">
+          <input class="easyui-textbox" id="custom-assignment" name="name" style="width:100%;"
+                 data-options="label:'名称：',labelPosition: 'left'">
+        </div>
+        <div style="margin:7px">
+
+          <input class="easyui-textbox" id="custom-assignment-desc" name="name" style="width:100%;"
+                 data-options="label:'描述：',labelPosition: 'left'">
+        </div>
+        <div style="margin:7px">
+          <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addToDataList()"
+             data-options="iconCls:'icon-add'"
+             style="width:120px;">添加自定义作业</a>
+        </div>
+      </form>
+      <div style="text-align:left;max-width:300px;padding:5px 0">
+
+      </div>
+    </div>
+  </div>
+
+  <div data-options="region:'east',border:false" style="width:35%">
+    <h2>已选择作业</h2>
+
+    
 
 
-        <table id="dg" class="easyui-datagrid" style="max-width:400px;height:300px;"
-               data-options="striped:true,
+    <table id="dg" class="easyui-datagrid" style="max-width:400px;height:250px;"
+           data-options="striped:true,
            scrollOnSelect:true,
            singleSelect:false"
-        >
-            <thead>
-            <tr>
-                <th field="ck" checkbox="true"></th>
-                <th data-options="field:'selectedAssignment',width:185">已选中作业</th>
-                <th data-options="field:'deadline',width:186">截止日期</th>
-            </tr>
-            </thead>
-        </table>
-
-        <div style="margin-bottom:20px">
-            <input id="dtb" class="easyui-datetimebox" label="Select DateTime:" labelPosition="top" style="width:100%;">
-        </div>
-        <div style="margin:20px 0;">
-            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" style="width:120px;"
-               onclick="deleteDataList()">删除选中作业</a>
-        </div>
-        <div style="margin:20px 0;">
-            <a href="#" class="easyui-linkbutton" data-options="" style="width:120px;"
-               onclick="selectedAssignmentDatagridSetDeadline()">为选中作业添加截止日期</a>
-        </div>
-        <div style="margin:20px 0;">
-            <a href="#" class="easyui-linkbutton" data-options="" style="width:120px;"
-               onclick="$('#dlg').dialog('open')">提交</a>
-        </div>
+    >
+      <thead>
+      <tr>
+        <th field="ck" checkbox="true"></th>
+        <th data-options="field:'selectedAssignment',width:185">已选中作业</th>
+        <th data-options="field:'deadline',width:186">截止日期</th>
+      </tr>
+      </thead>
+    </table>
+    <div style="margin:10px 0;">
 
     </div>
-</div>
+    <h2>自定义作业</h2>
+    <div style="margin:10px 0;">
+      <div class="easyui-panel" style="width:100%;max-width:400px;">
+        <form id="ff1" method="post">
+
+          <div style="margin:7px">
+            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" style="width:120px;"
+               onclick="deleteDataList()">删除选中作业</a>
+          </div>
+          <div style="margin:7px">
+            <input class="easyui-textbox" id="dtb" type="text" name="birthday" style="width:50%;">
+            <a href="#" class="easyui-linkbutton" data-options="" style="width:150px;"
+               onclick="selectedAssignmentDatagridSetDeadline()">添加选中作业截止日期</a>
+          </div>
+
+          <div style="margin:7px">
+
+          </div>
+        </form>
+      </div>
+      <div style="margin:7px;max-width:400px;text-align: right">
+        <a href="#" class="easyui-linkbutton" data-options="size:'large'" style="flaot:right;width:100px"
+           onclick="makeAlertMsg()">提交</a>
+      </div>
+
+    </div>
+  </div>
 
 
-<div id="dlg" class="easyui-dialog" title="确认信息" style="width:400px;height:200px;padding:10px"
-     data-options="
+  <div id="dlg" class="easyui-dialog" title="确认信息" style="width:400px;height:400px;padding:10px"
+       data-options="
+       closable:false,
      closed: true,
 				buttons: [{
 					text:'Ok',
@@ -141,231 +152,179 @@
 				}]
 			">
     The dialog content.
-</div>
-<script type="text/javascript">
-    formatterDate = function(date) {
-        var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
-        var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"
-            + (date.getMonth() + 1);
-        return date.getFullYear() + '-' + month + '-' + day+' 23:59:59';
+  </div>
+  <script type="text/javascript">
+    formatterDate = function (date) {
+      var day = date.getDate() > 9 ? date.getDate() : "0" + date.getDate();
+      var month = (date.getMonth() + 1) > 9 ? (date.getMonth() + 1) : "0"
+          + (date.getMonth() + 1);
+      return date.getFullYear() + '-' + month + '-' + day + ' 23:59:59';
     };
 
-    window.onload = function() {
-        console.log( formatterDate(new Date()))
-        $('#dtb').datetimebox('setValue', formatterDate(new Date()));
+    window.onload = function () {
+      console.log(formatterDate(new Date()))
+      $('#dtb').datetimebox('setValue', formatterDate(new Date()));
     };
+
     function selectedAssignmentDatagridAppendRow(assignmentName, deadline) {
-        //TODO 如果参数不为空
-        $('#dg').datagrid('appendRow', {
-            selectedAssignment: assignmentName,
-            deadline: deadline
-        });
+      //TODO 如果参数不为空
+      $('#dg').datagrid('appendRow', {
+        selectedAssignment: assignmentName,
+        deadline: deadline
+      });
     }
 
     function selectedAssignmentDatagridGetChecked() {
-        var arr = $('#dg').datagrid('getChecked')
-        var indexArr = [];
-        for (var index in arr) {
-            console.log(index);
-            console.log($('#dg').datagrid('getRowIndex', arr[index]));
-            indexArr.push($('#dg').datagrid('getRowIndex', arr[index]));
-        }
+      var arr = $('#dg').datagrid('getChecked')
+      var indexArr = [];
+      for (var index in arr) {
+        console.log(index);
+        console.log($('#dg').datagrid('getRowIndex', arr[index]));
+        indexArr.push($('#dg').datagrid('getRowIndex', arr[index]));
+      }
 
-        return indexArr;
+      return indexArr;
     }
 
     function selectedAssignmentDatagridDeleteRow(i) {
-        $('#dg').datagrid('deleteRow', i);
+      $('#dg').datagrid('deleteRow', i);
     }
 
     function selectedAssignmentDatagridSetDeadline() {
-        var indexArr = selectedAssignmentDatagridGetChecked();
-        for (var index in indexArr) {
-            $('#dg').datagrid('updateRow', {
-                index: indexArr[index],
-                row: {
-                    deadline: $('#dtb').val()
-                }
-            });
-        }
+      var indexArr = selectedAssignmentDatagridGetChecked();
+      for (var index in indexArr) {
+        $('#dg').datagrid('updateRow', {
+          index: indexArr[index],
+          row: {
+            deadline: $('#dtb').val()
+          }
+        });
+      }
     }
 
 
     $('#tt').tree({
-        onCheck: function (node, checked) {
+      onCheck: function (node, checked) {
 //            console.log('checked:' + checked);
-            if (checked) {
-                $('#dg').datagrid('appendRow', {
-                    selectedAssignment: node.text,
-                    deadline: ''
-                });
-//                $('#dg').datagrid('appendRow', {
-//                    text: node.text,
-//                    value: node.id
-//                });
-            } else {
-//                console.log($('#dg').datagrid('getRows'));
-                rows = $('#dg').datagrid('getRows');
-                console.log(rows)
-                for (var i = 0; i < rows.length; i++) {
-                    console.log('node.text: ' + node.text);
-                    console.log('rows[i].text: ' + rows[i].selectedAssignment);
-                    if (node.text == rows[i].selectedAssignment) {
-                        $('#dg').datagrid('deleteRow', i);
-                    }
-                }
+        if (checked) {
+          $('#dg').datagrid('appendRow', {
+            selectedAssignment: node.text,
+            deadline: ''
+          });
 
+        } else {
+//                console.log($('#dg').datagrid('getRows'));
+          rows = $('#dg').datagrid('getRows');
+          console.log(rows)
+          for (var i = 0; i < rows.length; i++) {
+            console.log('node.text: ' + node.text);
+            console.log('rows[i].text: ' + rows[i].selectedAssignment);
+            if (node.text == rows[i].selectedAssignment) {
+              $('#dg').datagrid('deleteRow', i);
             }
+          }
+
         }
+      }
     });
     $('#selected-user').combobox({
-        onChange: function (newValue, oldValue) {
-            console.log(newValue + '|' + oldValue)
-            console.log($('#selected-user').combo('getText'));
+      onChange: function (newValue, oldValue) {
+        console.log(newValue + '|' + oldValue)
+        console.log($('#selected-user').combo('getText'));
 
-            $('#dg2').datagrid('loadData', {
-                total: "0",
-                rows: []
-            });
-            var texts = new Array();
-            var values = new Array();
-            texts = $('#selected-user').combo('getText').split(',');
-            values = $('#selected-user').combo('getValues');
-            //TODO values =$('#selected-user').combo('getValues').split(',');
-            console.log(texts);
-            console.log(values);
-            for (var i = 0; i < texts.length; i++) {
-                $('#dg2').datagrid('appendRow', {
-                    text: texts[i],
-                    value: values[i]
-                });
-            }
+        $('#dg2').datagrid('loadData', {
+          total: "0",
+          rows: []
+        });
+        var texts = new Array();
+        var values = new Array();
+        texts = $('#selected-user').combo('getText').split(',');
+        values = $('#selected-user').combo('getValues');
+        //TODO values =$('#selected-user').combo('getValues').split(',');
+        console.log(texts);
+        console.log(values);
+        for (var i = 0; i < texts.length; i++) {
+          $('#dg2').datagrid('appendRow', {
+            text: texts[i],
+            value: values[i]
+          });
         }
+      }
     });
 
     function deleteDataList() {
-//        var arr = [];
-//        arr = selectedAssignmentDatagridGetChecked();
-//
-//
-//
-//        var arr = $('#dg').datagrid('getChecked')
-//        var indexArr = [];
-//        for (var index in arr) {
-//            console.log(index);
-//            console.log($('#dg').datagrid('getRowIndex', arr[index]));
-//            indexArr.push($('#dg').datagrid('getRowIndex', arr[index]));
-//        }
-//
-
-        var arr = $('#dg').datagrid('getChecked')
-
-
-        for (var index in arr) {
-
-            deleteOneDataList(arr[index].selectedAssignment)
-        }
-        $('#dg').datagrid('clearChecked');
-        $('#dg').datagrid('clearSelections');
+      var arr = $('#dg').datagrid('getChecked')
+      for (var index in arr) {
+        deleteOneDataList(arr[index].selectedAssignment)
+      }
+      $('#dg').datagrid('clearChecked');
+      $('#dg').datagrid('clearSelections');
 
 
     }
 
     function deleteOneDataList(assignmentName) {
-        //1.找到"选中作业列表"选中的作业,2.找到tree的节点
-//        var node = $('#tt').tree('find', assignmentName);
+      //1.找到"选中作业列表"选中的作业,2.找到tree的节点
 
 
-        //找到tree所有选中的，依次比较他们的text，和参数对比，如果相同，把这个target删掉
-//        var nodes = $('#tt').tree('getChecked');
-        var indexArr = $('#tt').tree('getChecked')
-        for (var nodeIndex in indexArr) {
-            var node1 = indexArr[nodeIndex];
-            if (node1.text == assignmentName) {
-                $('#tt').tree('uncheck', node1.target);
-//                if (null != node) {
-//
-//                } else {
-//                    //如果存在节点里，直接删了就行，tree里会直接被删
-//
-//                }
-            }
+      //找到tree所有选中的，依次比较他们的text，和参数对比，如果相同，把这个target删掉
+
+      var indexArr = $('#tt').tree('getChecked')
+      for (var nodeIndex in indexArr) {
+        var node1 = indexArr[nodeIndex];
+        if (node1.text == assignmentName) {
+          $('#tt').tree('uncheck', node1.target);
+
         }
+      }
 
-        var customNode = $('#dg').datagrid('getSelected');
-        if (null != customNode) {
-            $('#dg').datagrid('deleteRow', $('#dg').datagrid('getRowIndex', customNode));
-        }
-
-//        console.log('node: ' + node)
-        console.log(node1)
-//        //如果节点不存在，则取消勾选"选中作业列表"里的项，因为是自定义作业
-//        if (null != node) {
-//            $('#tt').tree('uncheck', node.target);
-//        } else {
-//            //如果存在节点里，直接删了就行，tree里会直接被删
-//            $('#dg').datagrid('deleteRow', $('#dg').datagrid('getRowIndex', $('#dg').datagrid('getSelected')));
-//        }
+      var customNode = $('#dg').datagrid('getSelected');
+      if (null != customNode) {
+        $('#dg').datagrid('deleteRow', $('#dg').datagrid('getRowIndex', customNode));
+      }
     }
 
     function addToDataList() {
-        var newRowText = $('#custom-assignment').textbox('getText');
-        console.log(newRowText);
-        if (newRowText.length != 0) {
-            console.log(1);
+      var newRowText = $('#custom-assignment').textbox('getText');
+      console.log(newRowText);
+      if (newRowText.length != 0) {
+        console.log(1);
 
-            $('#dg').datagrid('appendRow', {
-                selectedAssignment: $('#custom-assignment').textbox('getText'),
-                deadline: ''
-            });
-        } else {
-            $.messager.alert('警告', '不可以添加空自定义作业！', 'warning');
-        }
+        $('#dg').datagrid('appendRow', {
+          selectedAssignment: $('#custom-assignment').textbox('getText'),
+          deadline: ''
+        });
+      } else {
+        $.messager.alert('警告', '不可以添加空自定义作业！', 'warning');
+      }
 
     }
 
-    //    function deleteDataList() {
-    //        var node = $('#tt').tree('find', $('#dg').datagrid('getSelected').value);
-    //        if (null != node) {
-    //            $('#tt').tree('uncheck', node.target);
-    //        } else {
-    //            $('#dg').datagrid('deleteRow', $('#dg').datagrid('getRowIndex', $('#dg').datagrid('getSelected')));
-    //        }
-    //
-    //    }
-
-    //    function addToDataList() {
-    //        var newRowText = $('#custom-assignment').textbox('getText');
-    //        console.log(newRowText);
-    //        if (newRowText.length != 0) {
-    //            console.log(1);
-    //            $('#dg').datagrid('appendRow', {
-    //                text: $('#custom-assignment').textbox('getText'),
-    //                value: '0'
-    //            });
-    //        } else {
-    //            $.messager.alert('警告', '不可以添加空自定义作业！', 'warning');
-    //        }
-    //
-    //    }
-
     $("#selected-user").combobox({editable: false});
 
+    $('#dtb').datetimebox({
+      value: '3/4/2010 2:3',
+      showSeconds: true,
+      editable: false,
+      label: "截止日期",
+      labelPosition: "top"
+    });
+
     function makeAlertMsg() {
-
-        var rows = $('#dg').datagrid('getRows');
-        var result = '<h2>选中的学生: </h2><p>' + $('#selected-user').combo('getText') + '</p>';
-        result += '<h2>作业名&截止时间</h2>'
-        for (var i in rows) {
-            result += '<p>' + rows[i].selectedAssignment + '<br> ' + rows[i].deadline + '</p>'
-
-        }
-        $('#dlg').html(result);
-        return result;
+      var rows = $('#dg').datagrid('getRows');
+      var result = '<h2>选中的学生: </h2><p>' + $('#selected-user').combo('getText') + '</p>';
+      result += '<h2>作业名&截止时间</h2>';
+      for (var i in rows) {
+        result += '<p>' + rows[i].selectedAssignment + '<br>' + rows[i].deadline + '</p>'
+      }
+      $('#dlg').html(result);
+//      return result;
+      $('#dlg').html(result);
+      $('#dlg').dialog('open')
     }
 
     //TODO 选中作业表格加一列隐藏，作业id
     //TODO 加验证，优化代码
-</script>
+  </script>
 </body>
 </html>

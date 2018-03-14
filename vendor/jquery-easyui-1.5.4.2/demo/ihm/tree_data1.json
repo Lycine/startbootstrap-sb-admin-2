@@ -1,49 +1,38 @@
 [{
 	"id":1,
-	"text":"My Documents",
+	"text":"托福",
+	"state":"closed",
 	"children":[{
 		"id":11,
-		"text":"Photos",
+		"text":"阅读",
 		"state":"closed",
 		"children":[{
 			"id":111,
-			"text":"Friend"
+			"text":"托福-阅读-exc1"
 		},{
 			"id":112,
-			"text":"Wife"
+			"text":"托福-阅读-exc2"
 		},{
 			"id":113,
-			"text":"Company"
+			"text":"托福-阅读-exc3"
 		}]
 	},{
 		"id":12,
-		"text":"Program Files",
+		"text":"听力",
+		"state":"closed",
 		"children":[{
-			"id":"Intel" ,
-			"text":"Intel"
+			"id":121 ,
+			"text":"托福-听力-exc1"
 		},{
-			"id":"Java",
-			"text":"Java",
-			"attributes":{
-				"p1":"Custom Attribute1",
-				"p2":"Custom Attribute2"
-			}
+			"id":122,
+			"text":"托福-听力-exc2"
+
 		},{
 			"id":123,
-			"text":"Microsoft Office"
+			"text":"托福-听力-exc3"
 		},{
 			"id":124,
-			"text":"Games",
-			"checked":true
+			"text":"托福-听力-exc4"
 		}]
-	},{
-		"id":13,
-		"text":"index.html"
-	},{
-		"id":14,
-		"text":"about.html"
-	},{
-		"id":15,
-		"text":"welcome.html"
 	}]
 }]
