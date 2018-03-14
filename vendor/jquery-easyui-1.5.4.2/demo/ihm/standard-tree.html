@@ -10,10 +10,10 @@
   <script type="text/javascript" src="../../jquery.easyui.min.js"></script>
 </head>
 <body>
-<div class="easyui-layout" style="width:100%;max-width:1500px;height:500px;">
+<!--<div class="easyui-layout" style="width:100%;max-width:1600px;height:500px;">-->
+<!--</div>-->
 
-
-  <div data-options="region:'west',border:false" style="width:30%">
+  <div style="float:left;width:280px;margin:0 10px 0 10px">
     <h2>已选择学生</h2>
 
     <ul id="dg2" class="easyui-datalist" title="" lines="true"
@@ -39,7 +39,7 @@
 
   </div>
 
-  <div data-options="region:'center',border:false" style="width:35%">
+  <div style="float:left;width:300px">
     <h2>从作业条目中选择作业</h2>
     <div style="margin:10px 0;">
     </div>
@@ -73,8 +73,8 @@
         </div>
         <div style="margin:7px">
           <a href="javascript:void(0)" class="easyui-linkbutton" onclick="addToDataList()"
-             data-options="iconCls:'icon-add'"
-             style="width:120px;">添加自定义作业</a>
+             data-options="iconCls:'icon-add',size:'large'"
+             style="width:100%;">添加自定义作业</a>
         </div>
       </form>
       <div style="text-align:left;max-width:300px;padding:5px 0">
@@ -83,12 +83,8 @@
     </div>
   </div>
 
-  <div data-options="region:'east',border:false" style="width:35%">
+  <div style="float:left;width:410px">
     <h2>已选择作业</h2>
-
-    
-
-
     <table id="dg" class="easyui-datagrid" style="max-width:400px;height:250px;"
            data-options="striped:true,
            scrollOnSelect:true,
@@ -98,21 +94,23 @@
       <tr>
         <th field="ck" checkbox="true"></th>
         <th data-options="field:'selectedAssignment',width:185">已选中作业</th>
-        <th data-options="field:'deadline',width:186">截止日期</th>
+        <th data-options="field:'deadline',width:185">截止日期</th>
       </tr>
       </thead>
     </table>
     <div style="margin:10px 0;">
 
     </div>
-    <h2>自定义作业</h2>
+    <h2>操作已选择作业</h2>
     <div style="margin:10px 0;">
       <div class="easyui-panel" style="width:100%;max-width:400px;">
         <form id="ff1" method="post">
 
           <div style="margin:7px">
-            <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" style="width:120px;"
-               onclick="deleteDataList()">删除选中作业</a>
+            <a href="#" class="easyui-linkbutton"
+               data-options="iconCls:'icon-remove',size:'large'"
+               onclick="deleteDataList()"
+               style="width:100%;">删除选中作业</a>
           </div>
           <div style="margin:7px">
             <input class="easyui-textbox" id="dtb" type="text" name="birthday" style="width:50%;">
@@ -125,17 +123,20 @@
           </div>
         </form>
       </div>
-      <div style="margin:7px;max-width:400px;text-align: right">
-        <a href="#" class="easyui-linkbutton" data-options="size:'large'" style="flaot:right;width:100px"
-           onclick="makeAlertMsg()">提交</a>
-      </div>
+
 
     </div>
+    <div style="margin:0px;max-width:400px;">
+      <a href="#" class="easyui-linkbutton" data-options="size:'large',iconCls:'icon-ok'" style="width:100%"
+         onclick="makeAlertMsg()">提交</a>
+    </div>
+
   </div>
 
 
   <div id="dlg" class="easyui-dialog" title="确认信息" style="width:400px;height:400px;padding:10px"
        data-options="
+       modal:true,
        closable:false,
      closed: true,
 				buttons: [{
